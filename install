@@ -14,11 +14,11 @@ echo $ARCH
 echo "
 ______ _____________   _________ ________ _______ ________ _______ ________
 ___  / ____  _/___  | / /__  __ \___  __ \__  __ \___  __ )__  __ \___  __/
-__  /   __  /  __   |/ / _  / / /__  /_/ /_  / / /__  __  |_  / / /__  /   
-_  /_____/ /   _  /|  /  / /_/ / _  _, _/ / /_/ / _  /_/ / / /_/ / _  /    
-/_____//___/   /_/ |_/   \____/  /_/ |_|  \____/  /_____/  \____/  /_/     
-                    
-                            http://linorobot.org                                                                          
+__  /   __  /  __   |/ / _  / / /__  /_/ /_  / / /__  __  |_  / / /__  /
+_  /_____/ /   _  /|  /  / /_/ / _  _, _/ / /_/ / _  /_/ / / /_/ / _  /
+/_____//___/   /_/ |_/   \____/  /_/ |_|  \____/  /_____/  \____/  /_/
+
+                            http://linorobot.org
 "
 if [ "$3" != "test" ]
     then
@@ -29,7 +29,7 @@ if [ "$3" != "test" ]
                 echo "Example: $ ./install.sh 2wd xv11"
                 echo
                 exit 1
-                
+
         elif [[ "$1" != "2wd" && "$1" != "4wd" && "$1" != "mecanum" && "$1" != "ackermann" ]]
             then
                 echo "Invalid linorobot base: $1"
@@ -55,7 +55,7 @@ if [ "$3" != "test" ]
                 echo "realsense"
                 echo
                 exit 1
-        
+
         elif [[ "$ARCH" != "x86_64" && "$2" == "realsense" ]]
             then
                 echo "Intel Realsense R200 is not supported in $ARCH architecture."
@@ -64,7 +64,7 @@ if [ "$3" != "test" ]
         fi
 
         echo
-        echo -n "You are installing ROS-$ROSDISTRO Linorobot for $BASE base with a $SENSOR sensor. Enter [y] to continue. " 
+        echo -n "You are installing ROS-$ROSDISTRO Linorobot for $BASE base with a $SENSOR sensor. Enter [y] to continue. "
         read reply
         if [[ "$reply" != "y" && "$reply" != "Y" ]]
             then
@@ -112,7 +112,7 @@ ros-$ROSDISTRO-map-server \
 ros-$ROSDISTRO-navigation \
 ros-$ROSDISTRO-robot-localization \
 ros-$ROSDISTRO-tf2 \
-ros-$ROSDISTRO-tf2-ros 
+ros-$ROSDISTRO-tf2-ros
 
 if [[ "$3" == "test" ]]
     then
@@ -123,7 +123,7 @@ if [[ "$3" == "test" ]]
         ros-$ROSDISTRO-freenect-launch \
         ros-$ROSDISTRO-realsense-camera \
         ros-$ROSDISTRO-depthimage-to-laserscan \
-        ros-$ROSDISTRO-teb-local-planner 
+        ros-$ROSDISTRO-teb-local-planner
 
         cd $HOME/linorobot_ws/src
         git clone https://github.com/EAIBOT/ydlidar.git
@@ -136,6 +136,10 @@ else
     elif [[ "$SENSOR" == "rplidar" ]]
         then
             sudo apt-get install -y ros-$ROSDISTRO-rplidar-ros
+
+    elif [[ "$SENSOR" == "sick_tim551" ]]
+        then
+            sudo apt-get install -y ros-$ROSDISTRO-sick-tim
 
     elif [[ "$SENSOR" == "ydlidar" ]]
         then
