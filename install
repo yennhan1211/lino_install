@@ -173,17 +173,18 @@ else
 fi
 
 cd $HOME/linorobot_ws/src
-git clone https://github.com/linorobot/linorobot.git
+# git clone https://github.com/linorobot/linorobot.git
+git clone https://github.com/yennhan1211/linorobot.git
 git clone https://github.com/linorobot/imu_calib.git
 git clone https://github.com/linorobot/lino_pid.git
 git clone https://github.com/linorobot/lino_udev.git
 
 cd $HOME/linorobot_ws/src/linorobot
-TRAVIS_BRANCH="echo $TRAVIS_BRANCH"
-if [ "$TRAVIS_BRANCH" = "devel" ]; then git checkout devel; fi
+# TRAVIS_BRANCH="echo $TRAVIS_BRANCH"
+# if [ "$TRAVIS_BRANCH" = "devel" ]; then git checkout devel; fi
 
 cd $HOME/linorobot_ws/src/linorobot/teensy/firmware
-export PLATFORMIO_CI_SRC=$PWD/src/firmware.ino
+export PLATFORMIO_CI_SRC=$PWD/src/firmware_atmega2560.ino
 platformio ci --project-conf=./platformio.ini --lib="./lib/ros_lib" --lib="./lib/config"  --lib="./lib/motor"  --lib="./lib/kinematics"  --lib="./lib/pid"  --lib="./lib/imu" --lib="./lib/encoder"
 
 echo "source $HOME/linorobot_ws/devel/setup.bash" >> $HOME/.bashrc
